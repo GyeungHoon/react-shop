@@ -5,7 +5,7 @@ import data from './data.js';
 import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
 import Detail from './routes/Detail.js'
 import axios from 'axios';
-import 작명 from './routes/Cart.js'
+import Cart from './routes/Cart.js'
 
 
 function App() {
@@ -62,7 +62,7 @@ function App() {
           
         } />
 
-        <Route path="/cart" element={<div></div>}/>
+        <Route path="/cart" element={<Cart/>}/>
 
       </Routes>
 
