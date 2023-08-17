@@ -66,13 +66,13 @@ function Detail(props) {
       </div>
       <Nav variant="tabs" defaultActiveKey="link0">
         <Nav.Item>
-          <Nav.Link onClick={() => { 탭변경(0) }} eventKey="link0">버튼0</Nav.Link>
+          <Nav.Link onClick={() => { 탭변경(0) }} eventKey="link0">구매평</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link onClick={() => { 탭변경(1) }} eventKey="link1">버튼1</Nav.Link>
+          <Nav.Link onClick={() => { 탭변경(1) }} eventKey="link1">상품설명</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link onClick={() => { 탭변경(2) }} eventKey="link2">버튼2</Nav.Link>
+          <Nav.Link onClick={() => { 탭변경(2) }} eventKey="link2">고객센터</Nav.Link>
         </Nav.Item>
       </Nav>
       <TabContent 탭={탭} />
@@ -95,7 +95,7 @@ function TabContent(props) {
 
 
   return (<div className={'start ' + fade}>
-    {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][props.탭]}
+    {[<div>매우좋음</div>, <div>편안하고 가벼운 운동화</div>, <div>클레임은 사절임</div>][props.탭]}
   </div>)
 }
 

@@ -9,9 +9,8 @@ import Cart from './routes/Cart.js'
 
 
 function App() {
-console.log()
   useEffect(() => {
-    if (localStorage.getItem('watched')) {
+    if (!localStorage.getItem('watched')) {
       localStorage.setItem('watched', JSON.stringify([]))
     }
   }, [])
@@ -26,7 +25,7 @@ console.log()
 
       <Navbar bg="light" variant="light">
         <Container>
-          <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
+          <Navbar.Brand onClick={() => { navigete('/') }}>RMart</Navbar.Brand>
           <Nav className='me-auto'>
             <Nav.Link onClick={() => { navigete('/') }}>Home</Nav.Link>
             <Nav.Link onClick={() => { navigete('/cart') }}>cart</Nav.Link>
@@ -56,16 +55,31 @@ console.log()
                   let copy = [...shoes, ...data.data];
                   setShoes(copy);
                 })
-
-
-
             }}>버튼</button>
+
+
+            <div className="container">
+              <div className='row p-5' >
+               <h3 className='p-5'>최근본상품</h3>
+                {
+                  
+                  shoes.map(function (a, i) {
+                    let item = localStorage.getItem('watched')
+                    let recent = JSON.parse(item)
+                    
+                    return (
+                      <Recently shoes={recent[i]} i={recent[i]} ></Recently>
+                    )
+                  })
+                }
+              </div>
+            </div>
 
           </>
         } />
-        <Route  path="/detail/:id" element={
+        <Route path="/detail/:id" element={
 
-          <Detail  shoes={shoes} />
+          <Detail shoes={shoes} />
 
         } />
 
@@ -82,12 +96,22 @@ console.log()
 function Card(props) {
   let navigete = useNavigate();
   return (
-    <div onClick={() => { navigete('/detail/'+props.i) }} className="col-md-4">
-      <img src={'https://codingapple1.github.io/shop/shoes'+ (props.i + 1)+'.jpg'} alt="" width="80%" />
+    <div onClick={() => { navigete('/detail/' + props.i) }} className="col-md-4">
+      <img src={'https://codingapple1.github.io/shop/shoes' + (props.i + 1) + '.jpg'} alt="" width="80%" />
       <h4>{props.shoes.title}</h4>
-      <p>{props.shoes.content}</p>
+      <p>{props.shoes.price}원</p>
     </div>
   )
 }
 
+function Recently(props) {
+
+
+  let navigete = useNavigate();
+  return (
+    <div onClick={() => { navigete('/cart') }} className="col-md-4">
+      <img src={'https://codingapple1.github.io/shop/shoes' + (props.i + 1) + '.jpg'} alt="" width="30%" />
+    </div>
+  )
+}
 export default App;
