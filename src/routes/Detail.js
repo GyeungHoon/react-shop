@@ -1,14 +1,23 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-
+import { addItem } from "../store.js";
+import { useDispatch } from "react-redux";
 
 function Detail(props) {
 
-  
+  let dispatch = useDispatch()
 
   let [fade2, setFade2] = useState('')
 
+  useEffect(()=>{
+  let 꺼낸거 =  localStorage.getItem('watched')
+  꺼낸거 = JSON.parse(꺼낸거)
+  꺼낸거.push(찾은상품.id)
+  꺼낸거 = new Set(꺼낸거)
+  꺼낸거 = Array.from(꺼낸거)
+  localStorage.setItem('watched', JSON.stringify(꺼낸거))
+  }, [])
 
   useEffect(() => {
     let a = setTimeout(() => {
@@ -43,14 +52,16 @@ function Detail(props) {
       }
       <div className="row">
         <div className="col-md-6">
-          <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+          <img src={'https://codingapple1.github.io/shop/shoes'+ (찾은상품.id + 1)+'.jpg'} alt="" width="100%" />
         </div>
         <div className="col-md-6 mt-4">
 
           <h4 className="pt-5">{찾은상품.title}</h4>
           <p>{찾은상품.content}</p>
           <p>{찾은상품.price}원</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button className="btn btn-danger" onClick={()=>{
+            dispatch(addItem({id : 1, name : 'Red Knit', count : 1}))
+          }}>주문하기</button>
         </div>
       </div>
       <Nav variant="tabs" defaultActiveKey="link0">
