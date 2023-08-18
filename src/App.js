@@ -9,12 +9,11 @@ import Cart from './routes/Cart.js'
 
 
 function App() {
-  useEffect(() => {
-    if (!localStorage.getItem('watched')) {
+  let local = localStorage.getItem('watched')
+    console.log(local)
+    if ( local == null) {
       localStorage.setItem('watched', JSON.stringify([]))
     }
-  }, [])
-
 
 
   let [shoes, setShoes] = useState(data)
@@ -48,7 +47,7 @@ function App() {
                 }
               </div>
             </div>
-
+            
             <button onClick={() => {
               axios.get('https://codingapple1.github.io/shop/data2.json')
                 .then((data) => {
